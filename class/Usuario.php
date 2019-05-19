@@ -72,6 +72,53 @@
 
 		}
 
+		//atraves dessa lista trazemos toda a informacao em uma determinada tabela
+		public static function getList(){
+
+			$sql = new Sql();
+
+			return $sql->select("SELECT * FROM tb_usuarios ORDER BY deslogin;");
+
+
+		}
+
+		//vamos fazer agora um metodo list que busca um usuario 
+		public static function search($login){
+			$sql = new Sql();
+
+			return $sql->select("SELECT * FROM tb_usuarios WHERE deslogin LIKE :SEARCH ORDER BY deslogin", array(
+					':SEARCH'=>"%".$login."%"
+			));
+
+			//basicamente ele pega oque eu digitar dentro dessa variavel login, penso eu que seja algo que se pareca "looks like" e utlizamos a expressao LIKE para isso, logo retornara que seja igual ao parametro $login que passarmos
+		}
+
+		public function login($login, $password){
+			//a diferenca entre esse e o metodo "LoadById" e que nao vai ser mais por id, e vamos ter que passar por parametro o login e a senha, caso elas sejam iguais no db, setamos as variaveis com os valores de la, caso contrario jogamos uma execao 
+			$sql = new Sql();
+
+			$results = $sql->select("SELECT * FROM tb_usuarios WHERE deslogin = :LOGIN AND dessenha = :PASSWORD",array(
+					":LOGIN"=>$login,
+					":PASSWORD"=>$password,
+			));
+
+			if(count($results) > 0){
+				$row =  $results[0];
+
+				$this->setIdusuario($row['idusuario']);
+				$this->setDeslogin($row['deslogin']);
+				$this->setDessenha($row['dessenha']);
+				$this->setDtcadastro(new DateTime($row['dtcadastro']));
+
+			} else {
+
+				throw new Exception("Login e/ou senha invalidos.");
+				
+
+			}
+
+		}
+
 
 	}
 
