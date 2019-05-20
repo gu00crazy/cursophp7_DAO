@@ -27,8 +27,23 @@
 
 	//carrega um usuario usando o login e a senha
 	//temos que passar a informacao de um login que coincide com a senha daquela linha no db
-	$usuario = new Usuario();
-	$usuario->login("root","#*#N(!");
-	echo $usuario;
+	//$usuario = new Usuario();
+	//$usuario->login("root","#*#N(!");
+	//echo $usuario;
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	//criando um novo usuario atraves do insert
+	//$aluno = new Usuario("aluno","@lun0");
+	//$aluno->insert();
+	//echo $aluno;
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	//$usuario = new Usuario();
+	//como setamos o usuario como 5, ele vai fazer update no usuario de numero 5
+	//$usuario->loadById(5);
+	//$usuario->update("professor","19823rbgn");
+	//echo $usuario;
 
   ?>
